@@ -1,12 +1,12 @@
 // React
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 // Libraries
 import styled, { createGlobalStyle } from "styled-components";
+import Lottie from "lottie-react";
 
 // Components
 import Pagination from "./components/Pagination";
-import Animation from "./components/Animation";
 import Titles from "./components/Titles";
 
 // Assets
@@ -16,8 +16,9 @@ const GlobalStyles = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
-
     box-sizing: border-box;
+
+    font-family: "Alata", sans-serif;
   }
 
   #root {
@@ -70,11 +71,12 @@ const availableSegments = {
 
 export default function App() {
   const pages = 3;
+  const animationRef = useRef();
+
   const [page, setPage] = useState(1);
-  const [segments, setSegments] = useState([0, 33]);
   const [direction, setDirection] = useState(1);
   const [play, setPlay] = useState(false);
-  const [smallTitles, setSmallTitles] = useState(["Travel"]);
+  const [titles, setTitles] = useState(["Travel"]);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
@@ -86,13 +88,13 @@ export default function App() {
 
   useEffect(() => {
     handleSegmentsChange(page);
-    handleSmallTitlesChange(page);
+    handleTitlesChange(page);
   }, [page]);
 
-  const handleSmallTitlesChange = (title) => {
+  const handleTitlesChange = (title) => {
     const titles = ["Travel", "Surf", "Rest"];
 
-    setSmallTitles(titles.splice(0, title));
+    setTitles(titles.splice(0, title));
   };
 
   const handleKeyPress = (e) => {
@@ -108,25 +110,29 @@ export default function App() {
   };
 
   const handleSegmentsChange = (page) => {
+    if (!animationRef || !animationRef.current) return
+
+
     if (direction === 1) {
       if (page !== 1) {
-        setSegments([
-          availableSegments.start[page - 2],
-          availableSegments.stop[page - 2],
-        ]);
+        animationRef.current.playSegments(
+          [availableSegments.start[page - 2], availableSegments.stop[page - 2]],
+          true
+        );
       }
     } else {
       if (page !== pages) {
-        setSegments([
-          availableSegments.stop[page - 1],
-          availableSegments.start[page - 1],
-        ]);
+        animationRef.current.playSegments(
+          [availableSegments.stop[page - 1], availableSegments.start[page - 1]],
+          true
+        );
       }
     }
   };
 
   const handlePrevPageClick = () => {
     if (page !== 1 && !play) {
+      animationRef.current.setDirection(-1);
       setDirection(-1);
       setPlay(true);
       setPage((prevPage) => prevPage - 1);
@@ -135,6 +141,7 @@ export default function App() {
 
   const handleNextPageClick = () => {
     if (page !== pages && !play) {
+      animationRef.current.setDirection(1);
       setDirection(1);
       setPlay(true);
       setPage((prevPage) => prevPage + 1);
@@ -148,14 +155,14 @@ export default function App() {
   return (
     <Wrapper>
       <GlobalStyles />
-      <Titles smallTitles={smallTitles} />
-      <Animation
-        animation={animation}
-        segments={segments}
-        direction={direction}
-        play={play}
+      <Titles titles={titles} />
+      <Lottie
+        lottieRef={animationRef}
+        style={{ height: "100%", width: "100%" }}
+        animationData={animation}
+        loop={false}
+        autoplay={false}
         onComplete={handleAnimationComplete}
-        id="animation"
       />
       <Pagination
         numOfPages={pages}
