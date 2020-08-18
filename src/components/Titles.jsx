@@ -17,32 +17,24 @@ const Wrapper = styled.div`
 
 const TopWrapper = styled.div`
   position: absolute;
+
   top: 25px;
   left: 0;
 
   width: 100%;
 `;
 
-const MiddleWrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-
-  z-index: 1000;
-`;
-
 const SmallTitle = styled.h2`
   text-align: center;
-  color: #fff;
-  font-family: "Alata", sans-serif;
   text-transform: uppercase;
+
+  font-size: 28px;
+
+  color: #fff;
 `;
 
-const Titles = ({ smallTitles }) => {
-  const renderSmallTitles = smallTitles.map((title, i) => (
+const Titles = ({ titles }) => {
+  const renderTitles = titles.map((title, i) => (
     <SmallTitle key={`smallTitle_${i}`}>{title}</SmallTitle>
   ));
 
@@ -56,7 +48,7 @@ const Titles = ({ smallTitles }) => {
           transitionEnterTimeout={500}
           transitionLeaveTimeout={500}
         >
-          {renderSmallTitles}
+          {renderTitles}
         </CSSTransitionGroup>
       </TopWrapper>
     </Wrapper>
