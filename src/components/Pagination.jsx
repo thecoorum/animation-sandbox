@@ -80,7 +80,7 @@ const Arrow = styled.div`
   ${({ disabled }) =>
     disabled
       ? css`
-          opacity: 0.5;
+          opacity: 0;
           cursor: default;
         `
       : css`

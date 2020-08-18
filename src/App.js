@@ -27,31 +27,31 @@ const GlobalStyles = createGlobalStyle`
     overflow-x: hidden;
   }
 
-  .animation-enter {
+  .subtitle-enter {
     opacity: 0.01;
   }
   
-  .animation-enter.animation-enter-active {
+  .subtitle-enter.subtitle-enter-active {
     opacity: 1;
     transition: opacity 500ms ease-in;
   }
-  
-  .animation-leave {
+
+  .subtitle-leave {
     opacity: 1;
   }
   
-  .animation-leave.animation-leave-active {
+  .subtitle-leave.subtitle-leave-active {
     opacity: 0.01;
-    transition: opacity 300ms ease-in;
+    transition: opacity 500ms ease-in;
   }
 
-  .animation-appear {
+  .subtitle-appear {
     opacity: 0.01;
   }
-  
-  .animation-appear.animation-appear-active {
+
+  .subtitle-appear.subtitle-appear-active {
     opacity: 1;
-    transition: opacity .5s ease-in;
+    transition: opacity 500ms ease-in;
   }
 `;
 
@@ -74,7 +74,7 @@ export default function App() {
   const [segments, setSegments] = useState([0, 33]);
   const [direction, setDirection] = useState(1);
   const [play, setPlay] = useState(false);
-  const [titles, setTitles] = useState(["Travel"]);
+  const [smallTitles, setSmallTitles] = useState(["Travel"]);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
@@ -86,13 +86,13 @@ export default function App() {
 
   useEffect(() => {
     handleSegmentsChange(page);
-    handleTitleChange(page);
+    handleSmallTitlesChange(page);
   }, [page]);
 
-  const handleTitleChange = (title) => {
+  const handleSmallTitlesChange = (title) => {
     const titles = ["Travel", "Surf", "Rest"];
 
-    setTitles(titles.splice(0, title));
+    setSmallTitles(titles.splice(0, title));
   };
 
   const handleKeyPress = (e) => {
@@ -148,7 +148,7 @@ export default function App() {
   return (
     <Wrapper>
       <GlobalStyles />
-      <Titles titles={titles} />
+      <Titles smallTitles={smallTitles} />
       <Animation
         animation={animation}
         segments={segments}
