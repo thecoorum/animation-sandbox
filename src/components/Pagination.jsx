@@ -17,18 +17,14 @@ const Dot = styled.div`
 
   margin: 0 10px;
 
-  ${(props) =>
-    props.selected &&
+  cursor: pointer;
+
+  ${({ selected, primaryColor }) =>
+    selected &&
     css`
       width: 35px;
 
-      background-color: ${props.primaryColor};
-    `}
-
-  ${(props) =>
-    props.clickable &&
-    css`
-      cursor: pointer;
+      background-color: ${primaryColor};
     `}
 
   transition: all 0.15s;
@@ -79,19 +75,27 @@ const Arrow = styled.div`
 
   cursor: pointer;
 
-  &:hover {
-    color: #fff;
-
-    &:first-child {
-      transform: translateX(-5px);
-    }
-
-    &:last-child {
-      transform: translateX(5px);
-    }
-  }
-
   transition: all 0.15s;
+
+  ${({ disabled }) =>
+    disabled
+      ? css`
+          opacity: 0.5;
+          cursor: default;
+        `
+      : css`
+          &:hover {
+            color: #fff;
+
+            &:first-child {
+              transform: translateX(-5px);
+            }
+
+            &:last-child {
+              transform: translateX(5px);
+            }
+          }
+        `}
 `;
 
 const Wrapper = styled.div`
@@ -105,17 +109,20 @@ const Wrapper = styled.div`
 `;
 
 const Pagination = (props) => {
-  const handleClick = (page) => {
-    if (props.onPageChange) {
-      props.onPageChange(page);
+  const handleKeyPress = (e, dir) => {
+    if (e.key === 'Enter') {
+      switch (dir) {
+        case 'next':
+          props.onNextPageClick()
+          break;
+        case 'prev':
+          props.onPrevPageClick()
+          break;
+        default:
+          throw new Error('Invalid direction')
+      }
     }
-  };
-
-  const isClickable = (f) => {
-    if (typeof f === "function") return true;
-
-    return false;
-  };
+  }
 
   const renderDots = () => {
     const elements = [];
@@ -123,8 +130,7 @@ const Pagination = (props) => {
     for (let i = 0; i < props.numOfPages; i++) {
       elements.push(
         <Dot
-          onClick={() => handleClick(i + 1)}
-          clickable={isClickable(props.onPageChange)}
+          onClick={() => props.onPageChange(i + 1)}
           selected={props.page === i + 1}
           primaryColor={props.primaryColor}
           secondaryColor={props.secondaryColor}
@@ -139,10 +145,20 @@ const Pagination = (props) => {
   return (
     <Wrapper>
       <Arrows>
-        <Arrow onClick={props.onPrevPageClick && props.onPrevPageClick}>
+        <Arrow
+          disabled={props.page === 1}
+          onClick={props.onPrevPageClick}
+          onKeyPress={(e) => handleKeyPress(e, 'prev')}
+          tabIndex="1"
+        >
           <FontAwesomeIcon icon={faArrowLeft} />
         </Arrow>
-        <Arrow onClick={props.onNextPageClick && props.onNextPageClick}>
+        <Arrow
+          disabled={props.page === props.numOfPages}
+          onClick={props.onNextPageClick}
+          onKeyPress={(e) => handleKeyPress(e, 'next')}
+          tabIndex="1"
+        >
           <FontAwesomeIcon icon={faArrowRight} />
         </Arrow>
       </Arrows>

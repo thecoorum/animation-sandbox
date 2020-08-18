@@ -2,7 +2,6 @@
 import React from "react";
 
 // Libraries
-// import Lottie from "lottie-react-web";
 import Lottie from "react-lottie-player";
 
 const Animation = (props) => {

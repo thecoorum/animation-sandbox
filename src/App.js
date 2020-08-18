@@ -1,16 +1,32 @@
 // React
 import React, { useState, useEffect } from "react";
-import "./styles.css";
+// import "./styles.css";
 
 // Libraries
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 // Components
-import Pagination from "./Pagination";
-import Animation from "./Animation";
+import Pagination from "./components/Pagination";
+import Animation from "./components/Animation";
 
 // Assets
-import animation from "./van-animation.json";
+import animation from "./assets/van-animation.json";
+
+const GlobalStyles = createGlobalStyle`
+  * {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+  }
+
+  #root {
+    width: 100vw;
+    height: 100vh;
+
+    overflow-x: hidden;
+  }
+`
 
 const Wrapper = styled.div`
   position: relative;
@@ -96,6 +112,7 @@ export default function App() {
 
   return (
     <Wrapper>
+      <GlobalStyles />
       <Animation
         animation={animation}
         segments={segments}

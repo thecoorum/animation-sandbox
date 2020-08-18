@@ -1,10 +1,11 @@
 {
-  "name": "react",
+  "homepage": "https://thecoorum.github.io/animation-sandbox",
+  "name": "animation-sandbox",
   "version": "1.0.0",
-  "description": "React example starter project",
+  "description": "Sandbox for React and Lottie controlled animations",
   "keywords": [
     "react",
-    "starter"
+    "lottie"
   ],
   "main": "src/index.js",
   "dependencies": {
@@ -15,17 +16,20 @@
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-lottie-player": "1.0.1",
-    "react-scripts": "3.0.1",
+    "react-scripts": "^3.4.3",
     "styled-components": "5.1.1"
   },
   "devDependencies": {
+    "gh-pages": "^3.1.0",
     "typescript": "3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
