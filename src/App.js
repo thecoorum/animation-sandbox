@@ -26,7 +26,7 @@ const GlobalStyles = createGlobalStyle`
 
     overflow-x: hidden;
   }
-`
+`;
 
 const Wrapper = styled.div`
   position: relative;
@@ -38,7 +38,7 @@ const Wrapper = styled.div`
 
 const availableSegments = {
   start: [55, 230],
-  stop: [175, 350]
+  stop: [175, 350],
 };
 
 export default function App() {
@@ -77,32 +77,32 @@ export default function App() {
       if (page !== 1) {
         setSegments([
           availableSegments.start[page - 2],
-          availableSegments.stop[page - 2]
+          availableSegments.stop[page - 2],
         ]);
       }
     } else {
       if (page !== pages) {
         setSegments([
           availableSegments.stop[page - 1],
-          availableSegments.start[page - 1]
+          availableSegments.start[page - 1],
         ]);
       }
     }
   };
 
   const handlePrevPageClick = () => {
-    if (page !== 1) {
+    if (page !== 1 && !play) {
       setDirection(-1);
-      setPage((prevPage) => prevPage - 1);
       setPlay(true);
+      setPage((prevPage) => prevPage - 1);
     }
   };
 
   const handleNextPageClick = () => {
-    if (page !== pages) {
+    if (page !== pages && !play) {
       setDirection(1);
-      setPage((prevPage) => prevPage + 1);
       setPlay(true);
+      setPage((prevPage) => prevPage + 1);
     }
   };
 
