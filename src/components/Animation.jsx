@@ -4,17 +4,24 @@ import React from "react";
 // Libraries
 import Lottie from "react-lottie-player";
 
-const Animation = (props) => {
+const Animation = ({
+  onComplete,
+  animation,
+  play,
+  segments,
+  direction,
+  id,
+}) => {
   return (
     <Lottie
-      onComplete={props.onComplete}
-      animationData={props.animation}
+      onComplete={onComplete}
+      animationData={animation}
       loop={false}
-      play={props.play}
-      segments={props.segments}
-      direction={props.direction}
+      play={play}
+      segments={segments}
+      direction={direction}
       style={{ height: "100%" }}
-      id={props.id}
+      id={id}
     />
   );
 };

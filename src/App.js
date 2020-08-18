@@ -124,8 +124,6 @@ export default function App() {
       <Pagination
         numOfPages={pages}
         page={page}
-        primaryColor="lightblue"
-        secondaryColor="lightgrey"
         onPrevPageClick={handlePrevPageClick}
         onNextPageClick={handleNextPageClick}
       />

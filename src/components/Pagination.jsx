@@ -108,32 +108,40 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const Pagination = (props) => {
+const Pagination = ({
+  onNextPageClick,
+  onPrevPageClick,
+  numOfPages,
+  onPageChange,
+  page,
+  primaryColor,
+  secondaryColor,
+}) => {
   const handleKeyPress = (e, dir) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       switch (dir) {
-        case 'next':
-          props.onNextPageClick()
+        case "next":
+          onNextPageClick();
           break;
-        case 'prev':
-          props.onPrevPageClick()
+        case "prev":
+          onPrevPageClick();
           break;
         default:
-          throw new Error('Invalid direction')
+          throw new Error("Invalid direction");
       }
     }
-  }
+  };
 
   const renderDots = () => {
     const elements = [];
 
-    for (let i = 0; i < props.numOfPages; i++) {
+    for (let i = 0; i < numOfPages; i++) {
       elements.push(
         <Dot
-          onClick={() => props.onPageChange(i + 1)}
-          selected={props.page === i + 1}
-          primaryColor={props.primaryColor}
-          secondaryColor={props.secondaryColor}
+          onClick={() => onPageChange(i + 1)}
+          selected={page === i + 1}
+          primaryColor={primaryColor}
+          secondaryColor={secondaryColor}
           key={i}
         />
       );
@@ -146,17 +154,17 @@ const Pagination = (props) => {
     <Wrapper>
       <Arrows>
         <Arrow
-          disabled={props.page === 1}
-          onClick={props.onPrevPageClick}
-          onKeyPress={(e) => handleKeyPress(e, 'prev')}
+          disabled={page === 1}
+          onClick={onPrevPageClick}
+          onKeyPress={(e) => handleKeyPress(e, "prev")}
           tabIndex="1"
         >
           <FontAwesomeIcon icon={faArrowLeft} />
         </Arrow>
         <Arrow
-          disabled={props.page === props.numOfPages}
-          onClick={props.onNextPageClick}
-          onKeyPress={(e) => handleKeyPress(e, 'next')}
+          disabled={page === numOfPages}
+          onClick={onNextPageClick}
+          onKeyPress={(e) => handleKeyPress(e, "next")}
           tabIndex="1"
         >
           <FontAwesomeIcon icon={faArrowRight} />
@@ -169,6 +177,11 @@ const Pagination = (props) => {
       </Dots>
     </Wrapper>
   );
+};
+
+Pagination.defaultProps = {
+  primaryColor: "lightblue",
+  secondaryColor: "lightgrey",
 };
 
 export default Pagination;
