@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/animation-sandbox/static/js/main.d34a5e7f.chunk.js",
-    "main.js.map": "/animation-sandbox/static/js/main.d34a5e7f.chunk.js.map",
+    "main.js": "/animation-sandbox/static/js/main.bdf5e7ae.chunk.js",
+    "main.js.map": "/animation-sandbox/static/js/main.bdf5e7ae.chunk.js.map",
     "runtime-main.js": "/animation-sandbox/static/js/runtime-main.1857ea34.js",
     "runtime-main.js.map": "/animation-sandbox/static/js/runtime-main.1857ea34.js.map",
-    "static/js/2.496e5844.chunk.js": "/animation-sandbox/static/js/2.496e5844.chunk.js",
-    "static/js/2.496e5844.chunk.js.map": "/animation-sandbox/static/js/2.496e5844.chunk.js.map",
+    "static/js/2.710b424d.chunk.js": "/animation-sandbox/static/js/2.710b424d.chunk.js",
+    "static/js/2.710b424d.chunk.js.map": "/animation-sandbox/static/js/2.710b424d.chunk.js.map",
     "index.html": "/animation-sandbox/index.html",
-    "precache-manifest.3e3ea637882298ad20330c8b1956ff78.js": "/animation-sandbox/precache-manifest.3e3ea637882298ad20330c8b1956ff78.js",
+    "precache-manifest.174c03ead641bccfb6c0827437fd9941.js": "/animation-sandbox/precache-manifest.174c03ead641bccfb6c0827437fd9941.js",
     "service-worker.js": "/animation-sandbox/service-worker.js",
-    "static/js/2.496e5844.chunk.js.LICENSE.txt": "/animation-sandbox/static/js/2.496e5844.chunk.js.LICENSE.txt"
+    "static/js/2.710b424d.chunk.js.LICENSE.txt": "/animation-sandbox/static/js/2.710b424d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1857ea34.js",
-    "static/js/2.496e5844.chunk.js",
-    "static/js/main.d34a5e7f.chunk.js"
+    "static/js/2.710b424d.chunk.js",
+    "static/js/main.bdf5e7ae.chunk.js"
   ]
 }
