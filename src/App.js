@@ -1,6 +1,5 @@
 // React
 import React, { useState, useEffect } from "react";
-// import "./styles.css";
 
 // Libraries
 import styled, { createGlobalStyle } from "styled-components";
@@ -8,6 +7,7 @@ import styled, { createGlobalStyle } from "styled-components";
 // Components
 import Pagination from "./components/Pagination";
 import Animation from "./components/Animation";
+import Titles from "./components/Titles";
 
 // Assets
 import animation from "./assets/van-animation.json";
@@ -25,6 +25,33 @@ const GlobalStyles = createGlobalStyle`
     height: 100vh;
 
     overflow-x: hidden;
+  }
+
+  .animation-enter {
+    opacity: 0.01;
+  }
+  
+  .animation-enter.animation-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+  
+  .animation-leave {
+    opacity: 1;
+  }
+  
+  .animation-leave.animation-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
+
+  .animation-appear {
+    opacity: 0.01;
+  }
+  
+  .animation-appear.animation-appear-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
   }
 `;
 
@@ -47,6 +74,7 @@ export default function App() {
   const [segments, setSegments] = useState([0, 33]);
   const [direction, setDirection] = useState(1);
   const [play, setPlay] = useState(false);
+  const [titles, setTitles] = useState(["Travel"]);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
@@ -58,7 +86,14 @@ export default function App() {
 
   useEffect(() => {
     handleSegmentsChange(page);
+    handleTitleChange(page);
   }, [page]);
+
+  const handleTitleChange = (title) => {
+    const titles = ["Travel", "Surf", "Rest"];
+
+    setTitles(titles.splice(0, title));
+  };
 
   const handleKeyPress = (e) => {
     e = e || window.event;
@@ -113,6 +148,7 @@ export default function App() {
   return (
     <Wrapper>
       <GlobalStyles />
+      <Titles titles={titles} />
       <Animation
         animation={animation}
         segments={segments}
